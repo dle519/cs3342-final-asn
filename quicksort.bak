@@ -1,0 +1,9 @@
+#lang racket
+
+(define quicksort (lambda (L)
+                    ((or (null? L)
+                         (null? (cdr L)))
+                     L)
+                    (else
+                     (let ((pivot (car L))
+                           (rest (cdr L)))

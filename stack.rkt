@@ -1,0 +1,28 @@
+#lang racket
+
+(define make-stack (lambda ()
+(let ((stack '()))
+(lambda (cmd . arg)
+(cond
+  ((eq? cmd 'empty?) (null? stack))
+  ((eq? cmd 'top) (car stack) (error "cannot get the top"))
+  ((eq? cmd 'push!) (set! stack (append stack arg)))
+  ((eq? cmd 'pop!) (set! stack (reverse(cdr (reverse stack)))) (error "empty stacK: cannot pop"))
+  ((eq? cmd 'stack?) (display (reverse stack)))
+  ((eq? cmd 'top-nth) (list-ref (reverse stack) (- (car arg) 1)) (error "not enough elements"))
+  (else error "unknown operation"))))))
+
+(define my_stack (make-stack))
+(my_stack 'push! 4)
+(my_stack 'push! 1)
+(my_stack 'push! 5)
+(my_stack 'top)
+(my_stack 'top-nth 2)
+(my_stack 'top-nth 4)
+(my_stack 'pop!)
+(my_stack 'pop!)
+(my_stack 'empty)
+(my_stack 'empty?)
+(my_stack 'pop!)
+(my_stack 'top)
+(my_stack 'pop!)
